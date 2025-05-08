@@ -55,23 +55,26 @@ public class ConsultaTipoCambio : IConsultaTipoCambio
             var xmlContent = await response.Content.ReadAsStringAsync();
             var xml = XDocument.Parse(xmlContent);
 
-            // Navegar al valor dentro del XML
-            XNamespace ns = _configuration.GetSection("BCCR:Namespace").Value!;
-            var rateValue = xml.Descendants(ns + _configuration.GetSection("BCCR:Descendants").Value!)
+            var rateValue = xml.Descendants(_configuration.GetSection("BCCR:Descendants").Value!)
                 .FirstOrDefault()?
-                .Element(ns + _configuration.GetSection("BCCR:Num").Value!)?
+                .Element(_configuration.GetSection("BCCR:Num").Value!)?
                 .Value;
 
-            var dateValue = xml.Descendants(ns + _configuration.GetSection("BCCR:Descendants").Value!)
+            var dateValue = xml.Descendants(_configuration.GetSection("BCCR:Descendants").Value!)
                 .FirstOrDefault()?
-                .Element(ns + _configuration.GetSection("BCCR:Des").Value!)?
+                .Element(_configuration.GetSection("BCCR:Des").Value!)?
                 .Value;
+            
+            if (!DateTimeOffset.TryParse(dateValue, out var dto))
+            {
+                throw new NotFoundRateException("Fecha no válida en el XML.");
+            }
+            var formatDate = dto.DateTime;
 
-            var formatDate = DateTime.ParseExact(dateValue!, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-            var rate = decimal.Parse(rateValue!);
+            var rate = decimal.Parse(rateValue!, CultureInfo.InvariantCulture);
 
             return new Tuple<decimal, string>(rate, formatDate.ToString("dd/MM/yyyy"));
+
         }
         catch (Exception)
         {
@@ -103,22 +106,24 @@ public class ConsultaTipoCambio : IConsultaTipoCambio
             var xmlContent = await response.Content.ReadAsStringAsync();
             var xml = XDocument.Parse(xmlContent);
 
-            // Navegar al valor dentro del XML
-            XNamespace ns = _configuration.GetSection("BCCR:Namespace").Value!;
-            var rateValue = xml.Descendants(ns + _configuration.GetSection("BCCR:Descendants").Value!)
+            var rateValue = xml.Descendants(_configuration.GetSection("BCCR:Descendants").Value!)
                 .FirstOrDefault()?
-                .Element(ns + _configuration.GetSection("BCCR:Num").Value!)?
+                .Element(_configuration.GetSection("BCCR:Num").Value!)?
                 .Value;
 
-            var dateValue = xml.Descendants(ns + _configuration.GetSection("BCCR:Descendants").Value!)
+            var dateValue = xml.Descendants(_configuration.GetSection("BCCR:Descendants").Value!)
                 .FirstOrDefault()?
-                .Element(ns + _configuration.GetSection("BCCR:Des").Value!)?
+                .Element(_configuration.GetSection("BCCR:Des").Value!)?
                 .Value;
-
-            var formatDate = DateTime.ParseExact(dateValue!, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-            var rate = decimal.Parse(rateValue!);
-
+            
+            if (!DateTimeOffset.TryParse(dateValue, out var dto))
+            {
+                throw new NotFoundRateException("Fecha no válida en el XML.");
+            }
+            var formatDate = dto.DateTime;
+            
+            var rate = decimal.Parse(rateValue!, CultureInfo.InvariantCulture);
+            
             return new Tuple<decimal, string>(rate, formatDate.ToString("dd/MM/yyyy"));
         }
         catch (Exception)

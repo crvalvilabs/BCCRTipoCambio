@@ -13,6 +13,7 @@ public static class DependecyInjection
     /// <returns>The updated service collection with the ServicioWindows-related dependencies.</returns>
     public static IServiceCollection AddServicioWindows(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddSingleton<IHostedService, Worker>();
         return services;
     }
 }

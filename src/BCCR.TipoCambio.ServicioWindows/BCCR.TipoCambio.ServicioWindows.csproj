@@ -18,4 +18,8 @@
       <ProjectReference Include="..\BCCR.TipoCambio.Externas\BCCR.TipoCambio.Externas.csproj" />
       <ProjectReference Include="..\BCCR.TipoCambio.Infraestructura\BCCR.TipoCambio.Infraestructura.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Middlewares\" />
+    </ItemGroup>
 </Project>

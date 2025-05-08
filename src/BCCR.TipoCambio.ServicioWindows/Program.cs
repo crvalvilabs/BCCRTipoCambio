@@ -16,7 +16,5 @@ builder.Services.AddInfraestructura(builder.Configuration)
     .AddServicioWindows(builder.Configuration)
     .AddAplicacion(builder.Configuration);
 
-builder.Services.AddHostedService<Worker>();
-
 var host = builder.Build();
 host.Run();

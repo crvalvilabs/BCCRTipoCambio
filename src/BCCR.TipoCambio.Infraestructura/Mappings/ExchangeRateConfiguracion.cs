@@ -17,7 +17,7 @@ public class ExchangeRateConfiguracion
 {
     public ExchangeRateConfiguracion(EntityTypeBuilder<ExchangeRateEntity> builder)
     {
-        builder.ToTable(name: "ExchangeRate", schema: ": scheme Hotel");
+        builder.ToTable(name: "ExchangeRate", schema: "Hotel");
         builder.HasKey(x => x.RateId)
             .HasName("PK_ExchangeRate");
         builder.Property(x => x.RateId).ValueGeneratedOnAdd();

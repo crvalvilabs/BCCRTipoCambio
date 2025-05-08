@@ -27,11 +27,11 @@ public static class DependencyInjection
     {
         services.AddDbContext<NubaHotelContext>(opt =>
         {
-            opt.UseSqlServer(configuration.GetConnectionString("NubaHotelContext"));
+            opt.UseSqlServer(configuration.GetConnectionString("NubaHotel"));
         });
         
-        services.AddTransient<IExchageRateRepositorio, ExchangeRateRepositorio>();
-        services.AddTransient<ExchangeRateMapper>();
+        services.AddScoped<IExchageRateRepositorio, ExchangeRateRepositorio>();
+        services.AddSingleton<ExchangeRateMapper>();
         return services;
     }
 }

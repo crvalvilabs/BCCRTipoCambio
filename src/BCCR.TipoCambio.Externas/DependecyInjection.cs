@@ -19,7 +19,7 @@ public static class DependecyInjection
     /// <returns>The updated service collection with the added external dependencies.</returns>
     public static IServiceCollection AddExternas(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddTransient<IConsultaTipoCambio, ConsultaTipoCambio>();
+        services.AddHttpClient<IConsultaTipoCambio, ConsultaTipoCambio>();
         return services;
     }
 }

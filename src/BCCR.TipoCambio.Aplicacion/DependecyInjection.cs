@@ -19,7 +19,7 @@ public static class DependecyInjection
     /// <returns>The updated service collection with the registered application-level dependencies.</returns>
     public static IServiceCollection AddAplicacion(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddTransient<IObtenerTipoCambioUseCase, ObtenerTipocambioUseCase>();
+        services.AddScoped<IObtenerTipoCambioUseCase, ObtenerTipocambioUseCase>();
         
         return services;
     }
