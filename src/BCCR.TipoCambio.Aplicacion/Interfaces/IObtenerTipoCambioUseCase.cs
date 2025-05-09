@@ -1,4 +1,4 @@
-﻿namespace BCCR.TipoCambio.Application.Interfaces;
+﻿namespace BCCR.TipoCambio.Aplicacion.Interfaces;
 
 /// <summary>
 /// Defines the contract for collecting the exchange rate information.
@@ -8,7 +8,6 @@ public interface IObtenerTipoCambioUseCase
     /// <summary>
     /// Executes the use case to collect the exchange rate information.
     /// </summary>
-    /// <param name="cancellationToken">The cancellation token to monitor for cancellation requests.</param>   
-    /// <returns>A task representing the asynchronous operation.</returns>
+    /// <param name="cancellationToken">The cancellation token to monitor for cancellation requests.</param>
     Task Execute(CancellationToken cancellationToken);
 }

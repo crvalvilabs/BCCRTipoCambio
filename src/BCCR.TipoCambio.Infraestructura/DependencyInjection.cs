@@ -2,6 +2,8 @@
 using BCCR.TipoCambio.Infraestructura.Database;
 using BCCR.TipoCambio.Infraestructura.Mappers;
 using BCCR.TipoCambio.Infraestructura.Repositorios;
+using BCCR.TipoCambio.Infraestructura.Loggin;
+using BCCR.TipoCambio.Aplicacion.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +32,7 @@ public static class DependencyInjection
             opt.UseSqlServer(configuration.GetConnectionString("NubaHotel"));
         });
         
+        services.AddSingleton<IRegistroLog, RegistroLog>();
         services.AddScoped<IExchageRateRepositorio, ExchangeRateRepositorio>();
         services.AddSingleton<ExchangeRateMapper>();
         return services;

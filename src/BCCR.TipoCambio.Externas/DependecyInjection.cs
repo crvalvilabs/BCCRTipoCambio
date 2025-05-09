@@ -15,9 +15,8 @@ public static class DependecyInjection
     /// Registers external service dependencies for the exchange rate application.
     /// </summary>
     /// <param name="services">The service collection to which the external dependencies will be added.</param>
-    /// <param name="configuration">The application configuration that may be used to configure the external services.</param>
     /// <returns>The updated service collection with the added external dependencies.</returns>
-    public static IServiceCollection AddExternas(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddExternas(this IServiceCollection services)
     {
         services.AddHttpClient<IConsultaTipoCambio, ConsultaTipoCambio>();
         return services;

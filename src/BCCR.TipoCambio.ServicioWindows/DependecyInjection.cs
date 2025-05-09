@@ -9,9 +9,8 @@ public static class DependecyInjection
     /// Adds the ServicioWindows-related dependencies to the specified service collection.
     /// </summary>
     /// <param name="services">The service collection where the dependencies will be registered.</param>
-    /// <param name="configuration">The configuration object used to configure the registered services.</param>
     /// <returns>The updated service collection with the ServicioWindows-related dependencies.</returns>
-    public static IServiceCollection AddServicioWindows(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddServicioWindows(this IServiceCollection services)
     {
         services.AddSingleton<IHostedService, Worker>();
         return services;

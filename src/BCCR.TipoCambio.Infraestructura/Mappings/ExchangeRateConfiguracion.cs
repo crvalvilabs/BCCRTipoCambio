@@ -1,5 +1,4 @@
-﻿using BCCR.TipoCambio.Domain.Entities;
-using BCCR.TipoCambio.Infraestructura.Entities;
+﻿using BCCR.TipoCambio.Infraestructura.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

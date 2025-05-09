@@ -1,4 +1,4 @@
-using BCCR.TipoCambio.Application.Interfaces;
+using BCCR.TipoCambio.Aplicacion.Interfaces;
 
 namespace BCCR.TipoCambio.ServicioWindows;
 
@@ -19,16 +19,27 @@ public class Worker : BackgroundService
     private readonly IServiceScopeFactory _scopeFactory;
 
     /// <summary>
+    /// A readonly field that holds an instance of <c>IRegistroLog</c>, used for logging exceptions or other significant events.
+    /// </summary>
+    /// <remarks>
+    /// The <c>IRegistroLog</c> interface provides a method to log information, enabling the <c>Worker</c> class
+    /// to capture and persist exception details or other logs during the execution of its background operations.
+    /// </remarks>
+    private readonly IRegistroLog _logger;
+
+    /// <summary>
     /// Represents a background worker service that periodically performs an operation
     /// to fetch exchange rate information by using the defined use case.
     /// </summary>
     /// <param name="scopeFactory">The service scope factory used to create a service scope.</param>
+    /// <param name="logger">The logger used to log exceptions.</param>
     /// <remarks>
     /// This constructor initializes the service scope factory used to create a service scope.
     /// </remarks>
-    public Worker(IServiceScopeFactory scopeFactory)
+    public Worker(IServiceScopeFactory scopeFactory, IRegistroLog logger)
     {
         _scopeFactory = scopeFactory;
+        _logger = logger;
     }
 
     /// <summary>
@@ -47,10 +58,20 @@ public class Worker : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            using var scope = _scopeFactory.CreateScope();
-            var useCase = scope.ServiceProvider.GetRequiredService<IObtenerTipoCambioUseCase>();
-            await useCase.Execute(stoppingToken);
-            await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
+            try
+            {
+                using var scope = _scopeFactory.CreateScope();
+                var userCaseActualizarTasa = scope.ServiceProvider.GetRequiredService<IActualizarTasaUseCase>();
+                var useCaseObtenerTipoCambio = scope.ServiceProvider.GetRequiredService<IObtenerTipoCambioUseCase>();
+                await userCaseActualizarTasa.Execute(stoppingToken);
+                await useCaseObtenerTipoCambio.Execute(stoppingToken);
+                await Task.Delay(TimeSpan.FromMinutes(3), stoppingToken);
+            }
+            catch (Exception ex)
+            {
+                await _logger.RegistrarLog(ex);
+            }
+            
         }
     }
 }

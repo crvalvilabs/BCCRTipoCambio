@@ -1,4 +1,4 @@
-using BCCR.TipoCambio.Application;
+using BCCR.TipoCambio.Aplicacion;
 using BCCR.TipoCambio.ServicioWindows;
 using BCCR.TipoCambio.Infraestructura;
 using BCCR.TipoCambio.Externas;
@@ -12,9 +12,9 @@ builder.Services.AddWindowsService(opt =>
 
 // Add services to the container.
 builder.Services.AddInfraestructura(builder.Configuration)
-    .AddExternas(builder.Configuration)
-    .AddServicioWindows(builder.Configuration)
-    .AddAplicacion(builder.Configuration);
+    .AddExternas()
+    .AddServicioWindows()
+    .AddAplicacion();
 
 var host = builder.Build();
 host.Run();

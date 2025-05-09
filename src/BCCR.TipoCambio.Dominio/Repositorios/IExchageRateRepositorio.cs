@@ -15,6 +15,13 @@ public interface IExchageRateRepositorio
     /// </summary>
     /// <param name="exchangeRate">The exchange rate entity containing details such as date, currencies, buying rate, and selling rate.</param>
     /// <param name="cancellationToken">The cancellation token to monitor for cancellation requests during the operation.</param>
-    /// <returns>Returns a task with a boolean value indicating whether the exchange rate was successfully registered.</returns>
-    Task<bool> RegistrarTipoCambio(ExchangeRate exchangeRate, CancellationToken cancellationToken);
+    Task RegistrarTipoCambio(ExchangeRate exchangeRate, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Updates the state of the default exchange rate by setting its IsActive property to false
+    /// and persists the changes to the database.
+    /// </summary>
+    /// <param name="cancellationToken">A token to observe for cancellation requests.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    Task ActualizarEstado(CancellationToken cancellationToken);
 }

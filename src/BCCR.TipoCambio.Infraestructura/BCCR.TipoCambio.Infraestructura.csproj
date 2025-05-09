@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\BCCR.TipoCambio.Aplicacion\BCCR.TipoCambio.Aplicacion.csproj" />
       <ProjectReference Include="..\BCCR.TipoCambio.Dominio\BCCR.TipoCambio.Dominio.csproj" />
     </ItemGroup>
 

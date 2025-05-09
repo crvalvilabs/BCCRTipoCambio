@@ -67,7 +67,7 @@ public class ConsultaTipoCambio : IConsultaTipoCambio
             
             if (!DateTimeOffset.TryParse(dateValue, out var dto))
             {
-                throw new NotFoundRateException("Fecha no válida en el XML.");
+                throw new NotFoundRateException("Fecha no válida.");
             }
             var formatDate = dto.DateTime;
 
@@ -76,9 +76,9 @@ public class ConsultaTipoCambio : IConsultaTipoCambio
             return new Tuple<decimal, string>(rate, formatDate.ToString("dd/MM/yyyy"));
 
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            throw new NotFoundRateException("No se pudo obtener el tipo de cambio de compra del XML.");
+            throw new NotFoundRateException("No se pudo obtener el tipo de cambio de compra del XML.", e);
         }
     }
 
@@ -118,7 +118,7 @@ public class ConsultaTipoCambio : IConsultaTipoCambio
             
             if (!DateTimeOffset.TryParse(dateValue, out var dto))
             {
-                throw new NotFoundRateException("Fecha no válida en el XML.");
+                throw new NotFoundRateException("Fecha no válida.");
             }
             var formatDate = dto.DateTime;
             
@@ -126,9 +126,9 @@ public class ConsultaTipoCambio : IConsultaTipoCambio
             
             return new Tuple<decimal, string>(rate, formatDate.ToString("dd/MM/yyyy"));
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            throw new NotFoundRateException("No se pudo obtener el tipo de cambio de venta del XML.");       
+            throw new NotFoundRateException("No se pudo obtener el tipo de cambio de venta del XML.", e);       
         }
     }
     

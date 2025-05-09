@@ -1,9 +1,9 @@
-﻿using BCCR.TipoCambio.Application.Interfaces;
+﻿using BCCR.TipoCambio.Aplicacion.Interfaces;
 using BCCR.TipoCambio.Domain.Repositorios;
 using BCCR.TipoCambio.Domain.Entities;
 using BCCR.TipoCambio.Domain.Servicios;
 
-namespace BCCR.TipoCambio.Application.CasosDeUso;
+namespace BCCR.TipoCambio.Aplicacion.CasosDeUso;
 
 /// <summary>
 /// Represents a use case for retrieving and saving the exchange rate data.
@@ -41,8 +41,7 @@ public class ObtenerTipocambioUseCase : IObtenerTipoCambioUseCase
     /// Executes the use case for retrieving exchange rate data by consulting external services
     /// and saving the fetched information into the repository.
     /// </summary>
-    /// <param name="cancellationToken">The cancellation token to monitor for cancellation requests.</param>   
-    /// <returns>A task representing the asynchronous operation of fetching and persisting exchange rate data.</returns>
+    /// <param name="cancellationToken">The cancellation token to monitor for cancellation requests.</param>
     public async Task Execute(CancellationToken cancellationToken)
     {   
         var tipoCambioCompra = await _consultaTipoCambio.ConsultaCompra();
