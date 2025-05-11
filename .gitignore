@@ -3,3 +3,6 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
+# Ignorar archivos de configuración de appsettings
+appsettings.json
+appsettings.*.json

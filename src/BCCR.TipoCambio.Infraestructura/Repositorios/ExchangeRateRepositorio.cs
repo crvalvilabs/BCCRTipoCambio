@@ -46,7 +46,7 @@ public class ExchangeRateRepositorio : IExchageRateRepositorio
         try
         {
             var exchangeRateEntity = _exchangeRateMapper.MapToEntity(exchangeRate);
-            await _nubaHotelContext.ExchangeRates!.AddAsync(exchangeRateEntity, cancellationToken);
+            await _nubaHotelContext.ExchangeRates.AddAsync(exchangeRateEntity, cancellationToken);
             await _nubaHotelContext.SaveChangesAsync(cancellationToken);
         }
         catch (Exception e)
@@ -66,7 +66,7 @@ public class ExchangeRateRepositorio : IExchageRateRepositorio
     {
         try
         {
-            var exchangeRate = await _nubaHotelContext.ExchangeRates!
+            var exchangeRate = await _nubaHotelContext.ExchangeRates
                                    .FirstAsync(x => x.IsActive == true, cancellationToken) ?? 
                                throw new NotFoundRateException("No se pudo encontrar el tipo de cambio.") ; 
             exchangeRate.IsActive = false;
